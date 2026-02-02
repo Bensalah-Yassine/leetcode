@@ -1,26 +1,16 @@
+#include<stdbool.h>
 bool isPalindrome(int x) {
-
-    if(x == INT_MIN){
+    if(x < 0){
         return 0;
     }
-    int flag = 0;
-    if(x < 0){
-        x = -x;
-        flag = 1;
+    int digit ,org;
+    long int rev = 0;
+    org = x;
+    while(x != 0){
+        digit = x % 10;
+        rev = rev*10 + digit;
+        x = x / 10;
     }
-    int last = 0;
-    int dupe = x;
-    int palin = 0;
-    while(x > 0){
-        last = x % 10;
-        if((palin > INT_MAX / 10) || palin == INT_MAX/10 && last > 7) return 0;
-        if((palin < INT_MIN / 10) || palin == INT_MIN/10 && last < -8) return 0;
-
-        palin = palin*10 + last;
-        x = x/10;
-    }
-
-    if(flag)
-        return palin == -dupe;
-    return palin == dupe;
+    return (org == rev);
+    
 }
